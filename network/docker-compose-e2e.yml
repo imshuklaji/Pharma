@@ -95,7 +95,7 @@ services:
       # - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.transporter.pharma-network.com-cert.pem
       # - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9ed31fcf7a2fd649ac2e52254a041e4244dca899f86e6532789601c6fe18a019_sk
     ports:
-      - "9054:7054"
+      - "11054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d' # --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.transporter.pharma-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/9ed31fcf7a2fd649ac2e52254a041e4244dca899f86e6532789601c6fe18a019_sk
     volumes:
       - ./crypto-config/peerOrganizations/transporter.pharma-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
