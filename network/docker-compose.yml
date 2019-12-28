@@ -191,8 +191,6 @@ services:
     networks:
       - pharma
  
-
-
   cli:
     container_name: cli
     image: hyperledger/fabric-tools:latest
@@ -223,6 +221,8 @@ services:
       - ca.manufacturer.pharma-network.com
       - ca.distributor.pharma-network.com
       - ca.retailer.pharma-network.com
+      - ca.consumer.pharma-network.com
+      - ca.transporter.pharma-network.com
       - orderer.pharma-network.com
       - peer0.manufacturer.pharma-network.com
       - peer1.manufacturer.pharma-network.com
