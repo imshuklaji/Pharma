@@ -25,3 +25,17 @@ PeerOrgs:
       Count: 2
    Users:
       Count: 1
+ - Name: consumer
+   Domain: consumer.pharma-network.com
+   EnableNodeOUs: true
+   Template:
+      Count: 2
+   Users:
+      Count: 1
+ - Name: transporter
+   Domain: transporter.pharma-network.com
+   EnableNodeOUs: true
+   Template:
+      Count: 2
+   Users:
+      Count: 1
