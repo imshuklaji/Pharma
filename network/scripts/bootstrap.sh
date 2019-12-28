@@ -22,7 +22,7 @@ VERBOSE="$5"
 LANGUAGE=$(echo "$LANGUAGE" | tr [:upper:] [:lower:])
 COUNTER=1
 MAX_RETRY=15
-ORGS="manufacturer distributor retailer"
+ORGS="manufacturer distributor retailer consumer transporter"
 
 if [ "$LANGUAGE" = "node" ]; then
   CC_SRC_PATH="/opt/gopath/src/github.com/hyperledger/fabric/peer/chaincode/"
@@ -79,6 +79,11 @@ echo "Updating anchor peers for distributor..."
 updateAnchorPeers 0 'distributor'
 echo "Updating anchor peers for retailer..."
 updateAnchorPeers 0 'retailer'
+echo "Updating anchor peers for consumer..."
+updateAnchorPeers 0 'consumer'
+echo "Updating anchor peers for transporter..."
+updateAnchorPeers 0 'transporter'
+
 
 echo
 echo "========= All GOOD, Hyperledger Fabric Pharma Network Is Now Up and Running! =========== "
