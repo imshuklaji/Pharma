@@ -68,7 +68,41 @@ Organizations:
       - Host: peer0.retailer.pharma-network.com
         Port: 11051
 
+  - &consumer
+    Name: consumerMSP
+    ID: consumerMSP
+    MSPDir: crypto-config/peerOrganizations/consumer.pharma-network.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('consumerMSP.admin', 'consumerMSP.peer', 'consumerMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('consumerMSP.admin', 'consumerMSP.peer', 'consumerMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('consumerMSP.admin', 'consumerMSP.peer', 'consumerMSP.client')"
+    AnchorPeers:
+      - Host: peer0.consumer.pharma-network.com
+        Port: 13051
 
+  - &transporter
+    Name: transporterMSP
+    ID: transporterMSP
+    MSPDir: crypto-config/peerOrganizations/transporter.pharma-network.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('transporterMSP.admin', 'transporterMSP.peer', 'transporterMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('transporterMSP.admin', 'transporterMSP.peer', 'transporterMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('transporterMSP.admin', 'transporterMSP.peer', 'transporterMSP.client')"
+    AnchorPeers:
+      - Host: peer0.transporter.pharma-network.com
+        Port: 15051      
 
 #Capabilities
 
@@ -166,6 +200,8 @@ Profiles:
           - *manufacturer
           - *distributor
           - *retailer
+          - *consumer
+          - *transporter
 
   pharmachannel:
     Consortium: PharmaConsortium
@@ -175,5 +211,7 @@ Profiles:
         - *manufacturer
         - *distributor
         - *retailer
+        - *consumer
+        - *transporter
       Capabilities:
         <<: *ApplicationCapabilities
