@@ -10,7 +10,8 @@ ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrga
 PEER0_MANUFACTURER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturer.pharma-network.com/peers/peer0.manufacturer.pharma-network.com/tls/ca.crt
 PEER0_DISTRIBUTOR_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/distributor.pharma-network.com/peers/peer0.distributor.pharma-network.com/tls/ca.crt
 PEER0_RETAILER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/retailer.pharma-network.com/peers/peer0.retailer.pharma-network.com/tls/ca.crt
-
+PEER0_CONSUMER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/consumer.pharma-network.com/peers/peer0.consumer.pharma-network.com/tls/ca.crt
+PEER0_TRANSPORTER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/transporter.pharma-network.com/peers/peer0.transporter.pharma-network.com/tls/ca.crt
 # verify the result of the end-to-end test
 verifyResult() {
   if [ "$1" -ne 0 ]; then
@@ -58,6 +59,24 @@ setGlobals() {
       CORE_PEER_ADDRESS=peer0.retailer.pharma-network.com:11051
     else
       CORE_PEER_ADDRESS=peer1.retailer.pharma-network.com:12051
+    fi
+  elif [ "$ORG" == 'consumer' ]; then
+    CORE_PEER_LOCALMSPID="consumerMSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_consumer_CA
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/consumer.pharma-network.com/users/Admin@consumer.pharma-network.com/msp
+    if [ "$PEER" -eq 0 ]; then
+      CORE_PEER_ADDRESS=peer0.consumer.pharma-network.com:11051
+    else
+      CORE_PEER_ADDRESS=peer1.consumer.pharma-network.com:12051
+    fi
+  elif [ "$ORG" == 'transporter' ]; then
+    CORE_PEER_LOCALMSPID="transporterMSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_transporter_CA
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/transporter.pharma-network.com/users/Admin@transporter.pharma-network.com/msp
+    if [ "$PEER" -eq 0 ]; then
+      CORE_PEER_ADDRESS=peer0.transporter.pharma-network.com:11051
+    else
+      CORE_PEER_ADDRESS=peer1.transporter.pharma-network.com:12051
     fi
   else
     echo "================== ERROR !!! ORG Unknown =================="
