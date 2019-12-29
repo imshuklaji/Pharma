@@ -65,18 +65,18 @@ setGlobals() {
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_consumer_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/consumer.pharma-network.com/users/Admin@consumer.pharma-network.com/msp
     if [ "$PEER" -eq 0 ]; then
-      CORE_PEER_ADDRESS=peer0.consumer.pharma-network.com:11051
+      CORE_PEER_ADDRESS=peer0.consumer.pharma-network.com:13051
     else
-      CORE_PEER_ADDRESS=peer1.consumer.pharma-network.com:12051
+      CORE_PEER_ADDRESS=peer1.consumer.pharma-network.com:14051
     fi
   elif [ "$ORG" == 'transporter' ]; then
     CORE_PEER_LOCALMSPID="transporterMSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_transporter_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/transporter.pharma-network.com/users/Admin@transporter.pharma-network.com/msp
     if [ "$PEER" -eq 0 ]; then
-      CORE_PEER_ADDRESS=peer0.transporter.pharma-network.com:11051
+      CORE_PEER_ADDRESS=peer0.transporter.pharma-network.com:15051
     else
-      CORE_PEER_ADDRESS=peer1.transporter.pharma-network.com:12051
+      CORE_PEER_ADDRESS=peer1.transporter.pharma-network.com:16051
     fi
   else
     echo "================== ERROR !!! ORG Unknown =================="
