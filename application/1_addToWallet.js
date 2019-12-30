@@ -5,7 +5,7 @@
  * This Identity will be used to sign transactions initiated by this user.
  * Defaults:
  *  User Name: DISTRIBUTOR_ADMIN
- *  User Organization: distributor
+ *  User Organization: manufacturer
  *  User Role: Admin
  *
  */
@@ -17,7 +17,7 @@ const path = require('path'); // Support library to build filesystem paths in No
 const crypto_materials = path.resolve(__dirname, '../network/crypto-config'); // Directory where all Network artifacts are stored
 
 // A wallet is a filesystem path that stores a collection of Identities
-const wallet = new FileSystemWallet('./identity/distributor');
+const wallet = new FileSystemWallet('./identity/manufacturer');
 
 async function main(certificatePath, privateKeyPath) {
 
@@ -30,8 +30,8 @@ async function main(certificatePath, privateKeyPath) {
 		const privatekey = fs.readFileSync(privateKeyPath).toString();
 
 		// Load credentials into wallet
-		const identityLabel = 'DISTRIBUTOR_ADMIN';
-		const identity = X509WalletMixin.createIdentity('distributorMSP', certificate, privatekey);
+		const identityLabel = 'MANUFACTURER_ADMIN';
+		const identity = X509WalletMixin.createIdentity('manufacturerMSP', certificate, privatekey);
 
 		await wallet.import(identityLabel, identity);
 
@@ -42,7 +42,7 @@ async function main(certificatePath, privateKeyPath) {
 	}
 }
 
-main('/home/byteprojects/workspace/pharma/network/crypto-config/peerOrganizations/distributor.pharma-network.com/users/Admin@distributor.pharma-network.com/msp/signcerts/Admin@distributor.pharma-network.com-cert.pem', '/home/byteprojects/workspace/pharma/network/crypto-config/peerOrganizations/distributor.pharma-network.com/users/Admin@distributor.pharma-network.com/msp/keystore/b257eb9fd088c474e2c036e72ab2b2e4feedcd1545f9f6a7c534c080b0a1d261_sk').then(() => {
+main('/home/upgrad/workspace/pharma/network/crypto-config/peerOrganizations/manufacturer.pharma-network.com/users/Admin@manufacturer.pharma-network.com/msp/signcerts/Admin@manufacturer.pharma-network.com-cert.pem', '/home/upgrad/workspace/pharma/network/crypto-config/peerOrganizations/manufacturer.pharma-network.com/users/Admin@manufacturer.pharma-network.com/msp/keystore/4fbb206fe05598155df1d03db280cf1dab54357f56fd42bca7d2d1376fbb81cf_sk').then(() => {
   console.log('User identity added to wallet.');
 });
 

@@ -8,18 +8,18 @@ async function getContractInstance() {
 	
 	// A gateway defines which peer is used to access Fabric network
 	// It uses a common connection profile (CCP) to connect to a Fabric Peer
-	// A CCP is defined manually in file connection-profile-distributor.yaml
+	// A CCP is defined manually in file connection-profile-manufacturer.yaml
 	gateway = new Gateway();
 
 	// A wallet is where the credentials to be used for this transaction exist
-	// Credentials for user distributor_ADMIN was initially added to this wallet.
-	const wallet = new FileSystemWallet('./identity/distributor');
+	// Credentials for user manufacturer_ADMIN was initially added to this wallet.
+	const wallet = new FileSystemWallet('./identity/manufacturer');
 
 	// What is the username of this Client user accessing the network?
-	const fabricUserName = 'DISTRIBUTOR_ADMIN';
+	const fabricUserName = 'MANUFACTURER_ADMIN';
 
 	// Load connection profile; will be used to locate a gateway; The CCP is converted from YAML to JSON.
-	let connectionProfile = yaml.safeLoad(fs.readFileSync('./connection-profile-distributor.yaml', 'utf8'));
+	let connectionProfile = yaml.safeLoad(fs.readFileSync('./connection-profile-manufacturer.yaml', 'utf8'));
 
 	// Set connection options; identity and wallet
 	let connectionOptions = {

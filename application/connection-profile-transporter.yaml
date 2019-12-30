@@ -13,7 +13,7 @@ description: "Pharma Network"
 version: "1.0"
 
 client:
-  organization: retailer
+  organization: transporter
   connection:
     timeout:
       peer:
@@ -48,10 +48,10 @@ channels:
         ledgerQuery: true
         eventSource: false
       peer0.retailer.pharma-network.com:
-        endorsingPeer: true
-        chaincodeQuery: true
+        endorsingPeer: false
+        chaincodeQuery: false
         ledgerQuery: true
-        eventSource: true
+        eventSource: false
       peer1.retailer.pharma-network.com:
         endorsingPeer: false
         chaincodeQuery: false
@@ -68,10 +68,10 @@ channels:
         ledgerQuery: true
         eventSource: false
       peer0.transporter.pharma-network.com:
-        endorsingPeer: false
-        chaincodeQuery: false
+        endorsingPeer: true
+        chaincodeQuery: true
         ledgerQuery: true
-        eventSource: false
+        eventSource: true
       peer1.transporter.pharma-network.com:
         endorsingPeer: false
         chaincodeQuery: false
@@ -226,16 +226,16 @@ certificateAuthorities:
       - enrollId: admin
         enrollSecret: adminpw
     caName: ca.retailer.pharma-network.com
-  ca.trasporter.pharma-network.com:
+  ca.transporter.pharma-network.com:
     url: http://localhost:10054
     httpOptions:
       verify: false
     tlsCACerts:
-      path: /home/upgrad/workspace/pharma/network/crypto-config/peerOrganizations/trasporter.pharma-network.com/ca/ca.trasporter.pharma-network.com-cert.pem
+      path: /home/upgrad/workspace/pharma/network/crypto-config/peerOrganizations/transporter.pharma-network.com/ca/ca.transporter.pharma-network.com-cert.pem
     registrar:
       - enrollId: admin
         enrollSecret: adminpw
-    caName: ca.trasporter.pharma-network.com
+    caName: ca.transporter.pharma-network.com
   ca.consumer.pharma-network.com:
     url: http://localhost:11054
     httpOptions:

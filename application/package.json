@@ -1,12 +1,12 @@
 {
-	"name": "certification_network",
+	"name": "pharma-net",
 	"version": "1.0.0",
-	"description": "NodeJS Application Accessing The Certification Chaincode on Fabric Network",
+	"description": "NodeJS Application Accessing The Pharma-Net Chaincode on Fabric Network",
 	"main": "index.js",
 	"scripts": {
 		"test": "rm -rf identity && node index.js"
 	},
-	"author": "Aakash Bansal",
+	"author": "Shubham Shukla",
 	"dependencies": {
 		"cors": "^2.8.5",
 		"express": "^4.17.1",

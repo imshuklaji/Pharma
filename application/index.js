@@ -5,9 +5,6 @@ const port = 3000;
 
 // Import all function modules
 const addToWallet = require('./1_addToWallet');
-
-const createStudent = require('./2_createStudent');
-
 const registerCompany = require('./2_registerCompany');
 const addDrug = require('./3_addDrug');
 const createPO = require('./4_createPO');
@@ -21,7 +18,7 @@ const viewDrugCurrentState = require('./9_viewDrugCurrentState');
 app.use(cors());
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.set('title', 'Certification App');
+app.set('title', 'Pharma App');
 
 app.get('/', (req, res) => res.send('hello world'));
 
@@ -88,15 +85,34 @@ app.post('/addDrug', (req, res) => {
 			});
 });
 
-
+app.post('/createPO', (req, res) => {
+	createPO.execute(req.body.buyerCRN, req.body.sellerCRN, req.body.drugName, req.body.quantity)
+			.then((obj) => {
+				console.log('Purchase Order added!!');
+				const result = {
+					status: 'success',
+					message: 'Purchase Order added.',
+					obj: obj
+				};
+				res.json(result);
+			})
+			.catch((e) => {
+				const result = {
+					status: 'error',
+					message: 'Failed',
+					error: e
+				};
+				res.status(500).send(result);
+			});
+});
 
 app.post('/createShipment', (req, res) => {
 	createShipment.execute(req.body.buyerCRN, req.body.drugName, req.body.listOfAssets, req.body.transporterCRN)
 			.then((obj) => {
-				console.log('Shipment Created!!');
+				console.log('Shipment created!!');
 				const result = {
 					status: 'success',
-					message: 'Shipment Created',
+					message: 'Shipment created.',
 					obj: obj
 				};
 				res.json(result);
@@ -110,16 +126,14 @@ app.post('/createShipment', (req, res) => {
 				res.status(500).send(result);
 			});
 });
-
-
 
 app.post('/updateShipment', (req, res) => {
-	updateShipment.execute(req.body.buyerCRN, req.body.drugName,req.body.transporterCRN)
+	updateShipment.execute(req.body.buyerCRN, req.body.drugName, req.body.transporterCRN)
 			.then((obj) => {
-				console.log('Shipment Updated!!');
+				console.log('Shipment updated!!');
 				const result = {
 					status: 'success',
-					message: 'Shipment Updated',
+					message: 'Shipment updated.',
 					obj: obj
 				};
 				res.json(result);
@@ -133,15 +147,14 @@ app.post('/updateShipment', (req, res) => {
 				res.status(500).send(result);
 			});
 });
-
 
 app.post('/retailDrug', (req, res) => {
-	retailDrug.execute(req.body.drugName, req.body.serialNo,req.body.retailerCRN,req.body.customerAadhar)
+	retailDrug.execute(req.body.drugName, req.body.serialNo, req.body.retailerCRN, req.body.customerAadhar)
 			.then((obj) => {
-				console.log('Drug retailed to the consumer!!');
+				console.log('Drug retailed!!');
 				const result = {
 					status: 'success',
-					message: 'Drug retailed to the consumer',
+					message: 'Drug retailed.',
 					obj: obj
 				};
 				res.json(result);
@@ -155,39 +168,13 @@ app.post('/retailDrug', (req, res) => {
 				res.status(500).send(result);
 			});
 });
-
-
-
-
-app.post('/newStudent', (req, res) => {
-	createStudent.execute(req.body.studentId, req.body.name, req.body.email)
-			.then((student) => {
-				console.log('New student account created');
-				const result = {
-					status: 'success',
-					message: 'New student account created',
-					student: student
-				};
-				res.json(result);
-			})
-			.catch((e) => {
-				const result = {
-					status: 'error',
-					message: 'Failed',
-					error: e
-				};
-				res.status(500).send(result);
-			});
-});
-
 
 app.post('/viewHistory', (req, res) => {
 	viewHistory.execute(req.body.drugName, req.body.serialNo)
 			.then((obj) => {
-				console.log('History Shown for the Drug!!');
 				const result = {
 					status: 'success',
-					message: 'History Shown for the Drug',
+					message: 'Drug history found.',
 					obj: obj
 				};
 				res.json(result);
@@ -205,10 +192,9 @@ app.post('/viewHistory', (req, res) => {
 app.post('/viewDrugCurrentState', (req, res) => {
 	viewDrugCurrentState.execute(req.body.drugName, req.body.serialNo)
 			.then((obj) => {
-				console.log('Cuurent State Shown for the Drug!!');
 				const result = {
 					status: 'success',
-					message: 'Cuurent State Shown for the Drug',
+					message: 'Drug history found.',
 					obj: obj
 				};
 				res.json(result);
@@ -225,6 +211,4 @@ app.post('/viewDrugCurrentState', (req, res) => {
 
 
 
-
-
-app.listen(port, () => console.log(`Distributed Certification App listening on port ${port}!`));
+app.listen(port, () => console.log(`Distributed Pharma App listening on port ${port}!`));
