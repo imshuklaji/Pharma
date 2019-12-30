@@ -35,21 +35,31 @@ echo "New Version : "$VERSION
 # import utils
 . scripts/utils.sh
 
-## Install new version of chaincode on peer0 of all 3 orgs making them endorsers
+## Install new version of chaincode on peer0 and peer1 of all 5 orgs making them endorsers
 echo "Updating chaincode on peer0.manufacturer.pharma-network.com ..."
 installChaincode 0 'manufacturer' $VERSION
+echo "Updating chaincode on peer1.manufacturer.pharma-network.com ..."
+installChaincode 1 'manufacturer' $VERSION
 echo "Updating chaincode on peer0.distributor.pharma-network.com ..."
 installChaincode 0 'distributor' $VERSION
+echo "Updating chaincode on peer1.distributor.pharma-network.com ..."
+installChaincode 1 'distributor' $VERSION
 echo "Updating chaincode on peer0.retailer.pharma-network.com ..."
 installChaincode 0 'retailer' $VERSION
+echo "Updating chaincode on peer1.retailer.pharma-network.com ..."
+installChaincode 1 'retailer' $VERSION
 echo "Updating chaincode on peer0.consumer.pharma-network.com ..."
 installChaincode 0 'consumer' $VERSION
+echo "Updating chaincode on peer1.consumer.pharma-network.com ..."
+installChaincode 1 'consumer' $VERSION
 echo "Updating chaincode on peer0.transporter.pharma-network.com ..."
 installChaincode 0 'transporter' $VERSION
+echo "Updating chaincode on peer1.transporter.pharma-network.com ..."
+installChaincode 1 'transporter' $VERSION
 
-# retailere chaincode on the channel using peer0.manufacturer
+# upgrade chaincode on the channel using peer0.manufacturer
 echo "upgrading chaincode on channel using peer0.manufacturer.pharma-network.com ..."
-retailereChaincode 0 'manufacturer' $VERSION
+upgradeChaincode 0 'manufacturer' $VERSION
 
 echo
 echo "========= All GOOD, Chaincode PHARMANET Is Now Updated To Version '$VERSION' =========== "
