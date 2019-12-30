@@ -1,5 +1,5 @@
 {
-  "name": "certnet",
+  "name": "pharmanet",
   "version": "0.0.1",
   "description": "Pharma Network",
   "main": "index.js",
@@ -16,7 +16,7 @@
     "mocha": "mocha test --recursive"
   },
   "engineStrict": true,
-  "author": "Rohit Roy",
+  "author": "Shubham Shukla",
   "dependencies": {
     "fabric-contract-api": "~1.4.2",
     "fabric-shim": "~1.4.2"
